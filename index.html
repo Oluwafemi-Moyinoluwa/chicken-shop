@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fresh Chicken Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f8ff;--surface:#fff;--ink:#0e1b33;--muted:#5a6a86;--blue:#1f5eea;--blue-d:#1749c0;--tint:#e5eeff;--line:#d6e3fa;--ok:#0e9f6e;--err:#d64550;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a111f;--surface:#121c33;--ink:#eaf1ff;--muted:#93a4c3;--blue:#6b97ff;--blue-d:#8bb0ff;--tint:#1a2848;--line:#243457;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a111f;--surface:#121c33;--ink:#eaf1ff;--muted:#93a4c3;--blue:#6b97ff;--blue-d:#8bb0ff;--tint:#1a2848;--line:#243457;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:16px 18px 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:6px 0 18px}
+.brand{font-weight:800;font-size:1.3rem;letter-spacing:-.02em}
+.right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.who{color:var(--muted);font-weight:600;font-size:.92rem}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 14px;font-weight:700;cursor:pointer}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.pri:hover{background:var(--blue-d)}
+.btn.del{color:var(--err)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;margin-bottom:28px}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 12px;font-weight:800}
+.lead{color:var(--muted);font-size:1.05rem;margin:0 0 18px;max-width:46ch}
+.ph{position:relative;aspect-ratio:4/3;border-radius:22px;background:var(--tint);border:2px dashed var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;text-align:center}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph.has{border-style:solid}
+.up{position:absolute;right:10px;bottom:10px;background:var(--blue);color:#fff;border-radius:10px;padding:7px 12px;font-size:.85rem;font-weight:700;cursor:pointer}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px}
+.auth{max-width:420px;margin:0 auto}
+.tabs{display:flex;gap:4px;background:var(--tint);padding:4px;border-radius:14px;margin-bottom:16px}
+.tabs button{flex:1;border:0;background:transparent;padding:9px;border-radius:10px;font-weight:700;cursor:pointer;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--blue)}
+.f{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.f label{font-size:.82rem;color:var(--muted);font-weight:700}
+.f input,.f textarea{padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);width:100%}
+.msg{margin:0 0 12px;font-size:.9rem;font-weight:600;color:var(--err)}
+.msg.ok{color:var(--ok)}
+.demo{background:var(--tint);border-radius:14px;padding:12px 14px;margin:12px 0;font-size:.9rem}
+.demo b{font-size:1.5rem;letter-spacing:.2em;display:block;color:var(--blue-d)}
+.full{width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:18px}
+.prod{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.prod .ph{aspect-ratio:1/1;border-radius:16px}
+.prod h3{margin:0;font-size:1.08rem}
+.prod p{margin:0;color:var(--muted);font-size:.92rem}
+.price{font-weight:800;font-size:1.3rem;color:var(--blue-d)}
+.price small{font-weight:600;color:var(--muted);font-size:.8rem}
+.sec{display:flex;justify-content:space-between;align-items:center;margin:8px 0 14px;gap:10px;flex-wrap:wrap}
+.sec h2{margin:0;font-size:1.4rem;letter-spacing:-.02em}
+.bar{background:var(--tint);border-radius:16px;padding:10px 14px;margin-bottom:18px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-weight:600;font-size:.92rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;display:none;max-width:90%}
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden}
+img{max-width:100%}
+.hero>*,.prod,.card,.bar{min-width:0}
+.btn,.tabs button{min-height:44px}
+.btn,.f input,.f textarea,.prod input,.prod textarea{font-size:16px}
+@media (max-width:900px){.wrap{padding:14px 16px 48px}.hero{gap:20px}}
+@media (max-width:760px){.hero .ph{order:-1}.sec h2{font-size:1.2rem}}
+@media (max-width:480px){.wrap{padding:12px 12px 40px}header{flex-direction:column;align-items:flex-start}.right{width:100%}.right .btn{flex:1}.card{padding:16px;border-radius:20px}.row2{grid-template-columns:1fr}.price{font-size:1.15rem}}
+@media (min-width:1400px){.wrap{max-width:1240px}.grid{grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="toast" role="status"></div>
+<script type="application/json" id="data">{"shop":{"name":"Your Chicken Farm","tag":"Fresh chicken. Fair prices.","blurb":"Create a free account to see today’s cuts and prices.","hero":""},"cur":"₦","products":[{"id":"p1","name":"Whole broiler chicken","price":9500,"unit":"each (about 1.8 kg)","desc":"Cleaned and ready to cook.","img":""},{"id":"p2","name":"Chicken drumsticks","price":4800,"unit":"per kg","desc":"Juicy and great for grilling.","img":""},{"id":"p3","name":"Chicken wings","price":4200,"unit":"per kg","desc":"Perfect for frying or the oven.","img":""},{"id":"p4","name":"Chicken breast","price":5500,"unit":"per kg","desc":"Lean, boneless and skinless.","img":""},{"id":"p5","name":"Free-range chicken","price":12000,"unit":"each","desc":"Raised outdoors, firm and flavourful.","img":""}]}</script>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var D=JSON.parse($('#data').textContent);
+function ld(k,f){try{var r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var API='/api';/* set to 'api.php' when hosted with the PHP backend */
+var users=ld('chk-users',{}),sess=ld('chk-sess',null),tab='in',msg='',ok=false,pend=null,edit=false,canEdit=false,assets=null,art=null;
+function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
+function toast(t){var e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(function(){e.style.display='none'},3500)}
+function sha(s){try{return crypto.subtle.digest('SHA-256',new TextEncoder().encode('chk:'+s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return x.toString(16).padStart(2,'0')}).join('')})}catch(e){return Promise.resolve(btoa(unescape(encodeURIComponent('chk:'+s))))}}
+function code(){return String(Math.floor(100000+Math.random()*900000))}
+/* Email hook: a published page cannot send real email. Connect a mail service here later. */
+function sendEmail(to,c){return Promise.resolve({demo:true,to:to,code:c})}
+function me(){return sess&&users[sess]&&users[sess].verified?users[sess]:null}
+function money(n){return D.cur+Number(n||0).toLocaleString()}
+function slot(src,key,alt){
+  return '<div class="ph'+(src?' has':'')+'">'+(src?'<img src="'+esc(src)+'" alt="'+esc(alt)+'">':'<span>Photo goes here</span>')+
+  (edit?'<label class="up">'+(src?'Change photo':'Add photo')+'<input type="file" accept="image/*" data-up="'+key+'" hidden></label>':'')+'</div>'}
+function header(){
+  var u=me(),h='<header><div class="brand">'+(edit?'<input class="btn" data-s="name" value="'+esc(D.shop.name)+'" aria-label="Shop name">':esc(D.shop.name))+'</div><div class="right">';
+  if(canEdit)h+='<button class="btn" data-a="edit">'+(edit?'Preview':'Edit shop')+'</button>'+(edit?'<button class="btn pri" data-a="pub">Save &amp; publish</button>':'');
+  if(u)h+='<span class="who">Hi, '+esc(u.name)+'</span><button class="btn" data-a="out">Sign out</button>';
+  return h+'</div></header>'}
+function hero(){
+  var t=edit?'<input class="btn full" data-s="tag" value="'+esc(D.shop.tag)+'" aria-label="Headline" style="font-size:1.4rem;margin-bottom:10px"><textarea class="btn full" data-s="blurb" rows="2" aria-label="Intro">'+esc(D.shop.blurb)+'</textarea>':'<h1>'+esc(D.shop.tag)+'</h1><p class="lead">'+esc(D.shop.blurb)+'</p>';
+  return '<section class="hero"><div>'+t+'</div>'+slot(D.shop.hero,'hero','Shop')+'</section>'}
+function authCard(){
+  if(pend){var c=users[pend]||{};return '<div class="card auth"><h2 style="margin-top:0">Check your email</h2><p class="lead" style="margin-bottom:8px">We sent a 6-digit code to <b>'+esc(pend)+'</b>. Enter it to confirm it’s you.</p>'+
+  (API?'':'<div class="demo">Demo mode: real email isn’t connected yet, so your code is shown here.<b>'+esc(c.code)+'</b></div>')+
+  (msg?'<p class="msg'+(ok?' ok':'')+'">'+esc(msg)+'</p>':'')+
+  '<form id="vf"><div class="f"><label for="vc">Confirmation code</label><input id="vc" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required></div><button class="btn pri full" type="submit">Confirm and continue</button></form>'+
+  '<p style="text-align:center;margin:14px 0 0"><button class="btn" data-a="resend">Send a new code</button> <button class="btn" data-a="back">Use another email</button></p></div>'}
+  var up=tab==='up';
+  return '<div class="card auth"><div class="tabs" role="tablist"><button role="tab" data-a="tab" data-v="in" aria-selected="'+!up+'">Sign in</button><button role="tab" data-a="tab" data-v="up" aria-selected="'+up+'">Create account</button></div>'+
+  (msg?'<p class="msg'+(ok?' ok':'')+'">'+esc(msg)+'</p>':'')+
+  '<form id="af">'+(up?'<div class="f"><label for="an">Your name</label><input id="an" required maxlength="40" autocomplete="name"></div>':'')+
+  '<div class="f"><label for="ae">Email</label><input id="ae" type="email" required autocomplete="email"></div>'+
+  '<div class="f"><label for="ap">Password</label><input id="ap" type="password" required minlength="6" autocomplete="'+(up?'new-password':'current-password')+'"></div>'+
+  '<button class="btn pri full" type="submit">'+(up?'Create account':'Sign in')+'</button></form></div>'}
+function catalog(){
+  var h='<div class="sec"><h2>Today’s chicken and prices</h2>'+(edit?'<button class="btn pri" data-a="add">+ Add product</button>':'')+'</div><div class="grid">';
+  D.products.forEach(function(p){
+    h+='<article class="prod">'+slot(p.img,p.id,p.name);
+    if(edit)h+='<div class="f" style="margin:0"><input class="btn" data-f="name" data-id="'+p.id+'" value="'+esc(p.name)+'" aria-label="Name"></div><div class="row2"><input class="btn" type="number" min="0" data-f="price" data-id="'+p.id+'" value="'+p.price+'" aria-label="Price"><input class="btn" data-f="unit" data-id="'+p.id+'" value="'+esc(p.unit)+'" aria-label="Unit"></div><textarea class="btn" rows="2" data-f="desc" data-id="'+p.id+'" aria-label="Description">'+esc(p.desc)+'</textarea><button class="btn del" data-a="rm" data-id="'+p.id+'">Remove</button>';
+    else h+='<h3>'+esc(p.name)+'</h3><p>'+esc(p.desc)+'</p><div class="price">'+money(p.price)+' <small>'+esc(p.unit)+'</small></div>';
+    h+='</article>'});
+  return h+'</div>'}
+function render(){
+  var show=canEdit||me(),h=header();
+  if(canEdit&&edit)h+='<div class="bar"><span>Edit mode: change text, prices and photos, then press Save &amp; publish so everyone sees it.</span></div>';
+  h+=hero()+(show?catalog():authCard());
+  $('#app').innerHTML=h}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
+  if(a==='tab'){tab=b.dataset.v;msg='';render()}
+  else if(a==='out'){if(API)api('logout');sess=null;sv('chk-sess',null);edit=false;msg='';render()}
+  else if(a==='edit'){edit=!edit;render()}
+  else if(a==='add'){D.products.push({id:'p'+Date.now(),name:'New product',price:0,unit:'per kg',desc:'',img:''});render()}
+  else if(a==='rm'){D.products=D.products.filter(function(p){return p.id!==b.dataset.id});render()}
+  else if(a==='back'){pend=null;msg='';render()}
+  else if(a==='resend'){if(API){api('resend',{email:pend}).then(function(r){msg=r.ok?'A new code was sent.':(r.error||'Could not send.');ok=!!r.ok;render()});return}var u=users[pend];u.code=code();sv('chk-users',users);sendEmail(pend,u.code);msg='A new code was sent.';ok=true;render()}
+  else if(a==='pub')publish()});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset.s){D.shop[t.dataset.s]=t.value}
+  else if(t.dataset.f){var p=D.products.filter(function(x){return x.id===t.dataset.id})[0];if(p)p[t.dataset.f]=t.dataset.f==='price'?(+t.value||0):t.value}});
+document.addEventListener('change',function(e){
+  var t=e.target;if(!t.dataset.up)return;var f=t.files&&t.files[0];if(!f)return;
+  if(!assets){toast('Photo upload is only available to the shop owner.');return}
+  toast('Uploading…');
+  assets.upload(f).then(function(r){
+    if(t.dataset.up==='hero')D.shop.hero=r.url;else{var p=D.products.filter(function(x){return x.id===t.dataset.up})[0];if(p)p.img=r.url}
+    toast('Photo added');render()}).catch(function(){toast('Upload failed. Try a smaller image.')})});
+document.addEventListener('submit',function(e){
+  e.preventDefault();var id=e.target.id;
+  if(id==='af'){
+    var em=$('#ae').value.trim().toLowerCase(),pw=$('#ap').value,up=tab==='up';
+    if(API){api(up?'signup':'login',{name:up?$('#an').value.trim():'',email:em,password:pw}).then(function(r){
+      if(r.ok&&r.verified){users[em]={name:r.name,verified:true};sv('chk-users',users);sess=em;sv('chk-sess',sess);msg=''}
+      else if(r.ok&&r.needs_verify){pend=em;msg='';ok=false}
+      else{msg=r.error||'Something went wrong.';ok=false}
+      render()});return}
+    sha(pw).then(function(h){
+      if(up){
+        if(users[em]&&users[em].verified){msg='That email already has an account. Sign in instead.';ok=false;return render()}
+        users[em]={name:$('#an').value.trim(),hash:h,verified:false,code:code()};sv('chk-users',users);
+        sendEmail(em,users[em].code);pend=em;msg='';render()}
+      else{
+        var u=users[em];
+        if(!u||u.hash!==h){msg='Email or password is incorrect.';ok=false;return render()}
+        if(!u.verified){u.code=code();sv('chk-users',users);sendEmail(em,u.code);pend=em;msg='Confirm your email to continue.';ok=false;return render()}
+        sess=em;sv('chk-sess',sess);msg='';render()}})}
+  else if(id==='vf'){
+    var c=$('#vc').value.trim(),u=users[pend];
+    if(API){api('verify',{email:pend,otp:c}).then(function(r){if(r.ok){users[pend]={name:r.name,verified:true};sv('chk-users',users);sess=pend;sv('chk-sess',sess);pend=null;msg=''}else{msg=r.error||'That code doesn’t match.';ok=false}render()});return}
+    if(u&&u.code===c){u.verified=true;delete u.code;sv('chk-users',users);sess=pend;sv('chk-sess',sess);pend=null;msg='';render()}
+    else{msg='That code doesn’t match. Check it and try again.';ok=false;render()}}});
+function api(a,d){return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(Object.assign({action:a},d||{}))}).then(function(r){return r.json()}).catch(function(){return{ok:false,error:'Could not reach the server. Please try again.'}})}
+function publish(){
+  if(!art){toast('Publishing isn’t available here.');return}
+  var c=document.documentElement.cloneNode(true);
+  c.querySelector('#app').innerHTML='';c.querySelector('#toast').textContent='';c.querySelector('#toast').removeAttribute('style');
+  c.querySelector('#data').textContent=JSON.stringify(D).replace(/</g,'\\u003c');
+  art.publish('<!DOCTYPE html>\n'+c.outerHTML).catch(function(err){toast('Could not publish: '+((err&&(err.code||err.message))||'error'))})}
+render();
+if(API)api('me').then(function(r){if(r.ok&&r.email){users[r.email]={name:r.name,verified:true};sess=r.email;render()}else if(sess){sess=null;sv('chk-sess',null);render()}});
+if(window.claude&&window.claude.use){
+  window.claude.use('user').then(function(u){if(u&&u.canEdit()){canEdit=true;render()}}).catch(function(){});
+  window.claude.use('artifact').then(function(a){art=a}).catch(function(){});
+  window.claude.use('assets').then(function(a){assets=a}).catch(function(){})}
+})();
+</script>
+</body>
+</html>
